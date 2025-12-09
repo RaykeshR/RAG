@@ -1,0 +1,30 @@
+*/__pycache__
+__pycache__
+.venv
+venv
+*.env
+*/.env
+**/.env
+.env
+.exe
+.bin
+*.bin
+**.bin
+
+# Fichiers temporaires
+*.swp
+*.swo
+*~
+
+# Les Paquets / archives
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+# *.zip
+
+# Les Logs 
+*.log.env

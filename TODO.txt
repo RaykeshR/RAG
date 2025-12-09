@@ -1,0 +1,38 @@
+Cours : Langages fonctionnels et Big Data
+Faire un RAG, qui transforme 4-5 Document d'open food-fact en vecteur avec bge M3 ou autre
+Stocke les vecteur dans un BDD Vectorielle (Elasticsearch, Chroma, ...)
+user soit donne les document à vectoriser soit pose une question qui sera vectoriser avant une recherche topk(knn, HSwn) dans la BDD Vectorielle
+Les veteur les plus proche renvoyer sont reranker puis le prompt + vecteur. 
+On envoye aux LLM qui répond à l'user
+
+Note : 
+On veut un code python
+
+Résumer : 
+Mettre en place un pipeline RAG comprenant les étapes suivantes :
+
+Vectorisation
+
+Transformer 4 à 5 documents provenant d’Open Food Facts en embeddings à l’aide d’un modèle comme BGE-M3 (ou un autre modèle adapté).
+
+Possibilité pour l’utilisateur :
+
+soit de fournir des documents à vectoriser,
+
+soit de poser directement une question (celle-ci sera vectorisée pour la recherche).
+
+Stockage
+
+Enregistrer les vecteurs dans une base vectorielle (Elasticsearch, Chroma, etc.).
+
+Recherche sémantique
+
+À chaque requête utilisateur, effectuer une recherche top-k (kNN, HNSW…) dans la base vectorielle.
+
+Reranker les vecteurs retournés pour améliorer la pertinence.
+
+Génération
+
+Construire le prompt final en combinant la requête de l’utilisateur et les documents sélectionnés.
+
+Envoyer cet ensemble à un LLM pour produire la réponse finale.
