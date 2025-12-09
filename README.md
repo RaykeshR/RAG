@@ -1,45 +1,78 @@
-# RAG Pipeline for Open Food Facts
+<div align="center">
+  <h1>RAG Pipeline for Open Food Facts</h1>
+  <p>
+    This project implements a Retrieval-Augmented Generation (RAG) pipeline to answer questions about food products using documents from Open Food Facts.
+  </p>
+  <p>
+    <a href="https://github.com/RaykeshR/RAG"><strong>Explore the docs »</strong></a>
+    <br />
+    <br />
+    <a href="https://github.com/RaykeshR/RAG/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/RaykeshR/RAG/issues">Request Feature</a>
+  </p>
+</div>
 
-This project implements a Retrieval-Augmented Generation (RAG) pipeline to answer questions about food products. The pipeline is built using Langchain and is exposed through a FastAPI application.
+<div align="center">
 
-## Features
+[![My Skills](https://skillicons.dev/icons?i=py)](https://www.python.org/)
+[![My Skills](https://skillicons.dev/icons?i=fastapi)](https://fastapi.tiangolo.com/)
+[![My Skills](https://skillicons.dev/icons?i=git)](https://git-scm.com/)
+[![My Skills](https://skillicons.dev/icons?i=github)](https://github.com/RaykeshR/RAG)
+[![My Skills](https://skillicons.dev/icons?i=md)](https://docs.github.com/fr/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax)
+[![My Skills](https://skillicons.dev/icons?i=vscode)](https://code.visualstudio.com/)
 
-*   **Langchain-Native Architecture:** The pipeline is built using core Langchain components, including document loaders, text splitters, embedding models, and vector stores.
-*   **FastAPI:** A FastAPI application to expose the RAG pipeline's functionality through a simple API, including file uploads for dynamic knowledge base updates.
-*   **Multi-file type support:** Utilizes Langchain's document loaders to ingest various file types (e.g., `.txt`, `.pdf`).
-*   **Pluggable Embeddings and Vector Stores:** Uses Langchain's `Chroma` vector store and `HuggingFaceBgeEmbeddings`, making it easy to swap with other Langchain-compatible components.
-*   **Reranking for Relevance:** Includes a reranking step after retrieval to improve the quality of the context provided to the LLM.
-*   **Local LLM Integration:** Integrates with local LLMs via Ollama (e.g., Mistral), making it free to run and keeping data private.
+</div>
 
-## Project Structure
+## Table of Contents
+<details>
+  <summary>Click to expand</summary>
+  <ol>
+    <li><a href="#about-the-project">About The Project</a></li>
+    <li><a href="#getting-started">Getting Started</a></li>
+    <li><a href="#usage">Usage</a></li>
+    <li><a href="#project-structure">Project Structure</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#license">License</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#acknowledgments">Acknowledgments</a></li>
+  </ol>
+</details>
 
-```
-├── api
-│   └── main.py         # FastAPI application
-├── data                # Optional: Directory for initial documents loaded at startup
-├── uploads             # Temporary directory for uploaded files via API
-├── src
-│   ├── document_processor.py
-│   ├── generator.py
-│   ├── rag_pipeline.py # Core RAG pipeline logic
-│   ├── reranker.py
-│   └── vector_store.py
-├── venv                # Python virtual environment
-├── GEMINI.md
-├── requirements.txt
-├── TODO.txt
-└── README.md
-```
+## About The Project
+This project implements a Retrieval-Augmented Generation (RAG) pipeline to answer questions about food products using documents from Open Food Facts. The pipeline is built with Python and Langchain, and exposed through a FastAPI application.
 
-## Setup and Installation
+The core components of the pipeline are:
+*   **Vectorization:** Documents are transformed into vector embeddings.
+*   **Vector Storage:** Vectors are stored in a Chroma vector database.
+*   **Semantic Search:** User queries are vectorized to perform a similarity search.
+*   **Reranking:** Retrieved documents are reranked to improve relevance.
+*   **Response Generation:** A Large Language Model (LLM) generates an answer based on the query and retrieved documents.
 
-1.  **Clone the repository:**
-    ```bash
-    git clone <repository-url>
-    cd <repository-name>
+### Built With
+*   [Python](https://www.python.org/)
+*   [FastAPI](https://fastapi.tiangolo.com/)
+*   [Langchain](https://www.langchain.com/)
+*   [Chroma](https://www.trychroma.com/)
+*   [Ollama](https://ollama.com/)
+
+## Getting Started
+<details>
+<summary>Click to expand</summary>
+
+To get a local copy up and running follow these simple steps.
+
+### Prerequisites
+*   Python 3.8+
+*   [Ollama](https://ollama.com/) installed and running.
+
+### Installation
+1.  Clone the repo
+    ```sh
+    git clone https://github.com/RaykeshR/RAG.git
     ```
-
-2.  **Create and activate a virtual environment:**
+2.  Create and activate a virtual environment:
     ```bash
     python -m venv venv
     ```
@@ -51,49 +84,33 @@ This project implements a Retrieval-Augmented Generation (RAG) pipeline to answe
     ```bash
     source venv/bin/activate
     ```
-
-3.  **Install the required dependencies:**
+3.  Install the required dependencies:
     ```bash
     pip install -r requirements.txt
     ```
-
-4.  **Set up a Local LLM with Ollama:**
-    This project is configured to use a local LLM running via [Ollama](https://ollama.com/).
-    
-    a. **Install Ollama:** Follow the instructions on their website to download and install Ollama for your operating system.
-
-    b. **Download the Mistral model:** Once Ollama is running, open your terminal and pull the Mistral model:
+4.  Download the Mistral model with Ollama:
     ```bash
     ollama pull mistral
     ```
-    Ensure the Ollama application is running in the background before starting the FastAPI server.
+</details>
 
-## Running the Application
+## Usage
+<details>
+<summary>Click to expand</summary>
 
 To start the FastAPI server, run the following command from the project's root directory:
-
 ```bash
 uvicorn api.main:app --reload
 ```
 The API will be available at `http://127.0.0.1:8000`. You can access the interactive Swagger UI documentation at `http://127.0.0.1:8000/docs`.
 
-**Initial Data Loading:** If a `data` directory exists in the project root, the RAG pipeline will attempt to load and index documents from it during startup.
-
-## API Endpoints
-
-The FastAPI server provides the following endpoints:
-
-*   `GET /health`: Health check endpoint to verify API status and RAG pipeline initialization.
-*   `POST /query`: Processes a natural language query using the RAG pipeline.
-*   `POST /upload_document`: Uploads a document (e.g., `.txt`, `.pdf`), processes it, and adds it to the RAG pipeline's vector store.
-*   `GET /documents`: Retrieves basic information about all documents currently indexed in the RAG pipeline's vector store.
-
-### How to Use the API
-
-You can use a tool like `curl` to interact with the API, or the interactive Swagger UI at `http://127.0.0.1:8000/docs`.
+### API Endpoints
+*   `GET /health`: Health check endpoint.
+*   `POST /query`: Processes a natural language query.
+*   `POST /upload_document`: Uploads a document to the knowledge base.
+*   `GET /documents`: Retrieves information about indexed documents.
 
 **Query Example:**
-
 ```bash
 curl -X POST "http://127.0.0.1:8000/query" \
 -H "Content-Type: application/json" \
@@ -104,21 +121,64 @@ curl -X POST "http://127.0.0.1:8000/query" \
 }'
 ```
 
-**Upload Document Example (using a dummy text file named `my_document.txt`):**
-
+**Upload Document Example:**
 ```bash
-# First, create a dummy file for testing:
-echo "This is a new test document about organic vegetables." > my_document.txt
-
-# Then, upload it:
 curl -X POST "http://127.0.0.1:8000/upload_document" \
--H "accept: application/json" \
 -H "Content-Type: multipart/form-data" \
 -F "file=@my_document.txt"
 ```
+</details>
 
-**Get All Indexed Documents Example:**
+## Project Structure
+<details>
+<summary>Click to expand</summary>
 
-```bash
-curl -X GET "http://127.0.0.1:8000/documents"
 ```
+├── api
+│   └── main.py
+├── data
+├── uploads
+├── src
+│   ├── document_processor.py
+│   ├── generator.py
+│   ├── rag_pipeline.py
+│   ├── reranker.py
+│   └── vector_store.py
+├── venv
+├── GEMINI.md
+├── requirements.txt
+├── TODO.txt
+└── README.md
+```
+</details>
+
+## Roadmap
+- [ ] Add support for more document types.
+- [ ] Implement a more advanced reranking model.
+- [ ] Add user authentication.
+- [ ] Create a web interface for easier interaction.
+
+See the [open issues](https://github.com/RaykeshR/RAG/issues) for a full list of proposed features (and known issues).
+
+## Contributing
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
+Don't forget to give the project a star! Thanks again!
+
+1.  Fork the Project
+2.  Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3.  Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4.  Push to the Branch (`git push origin feature/AmazingFeature`)
+5.  Open a Pull Request
+
+## License
+Distributed under the MIT License. See `LICENSE.txt` for more information.
+
+## Contact
+Project Link: [https://github.com/RaykeshR/RAG](https://github.com/RaykeshR/RAG)
+
+## Acknowledgments
+*   [Open Food Facts](https://world.openfoodfacts.org/)
+*   [Langchain](https://www.langchain.com/)
+*   [Best-README-Template](https://github.com/othneildrew/Best-README-Template)
