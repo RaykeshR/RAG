@@ -153,6 +153,12 @@ Modifier .git\info\exclude
 
 </details>
 
+### Download Mistral Model
+1.  Download the Mistral model with Ollama:
+    ```bash
+    ollama pull mistral
+    ```
+
 </details>
 
 ## Usage
