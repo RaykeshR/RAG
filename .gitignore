@@ -31,3 +31,6 @@ venv
 
 # Les Logs 
 *.log.env
+
+# Chroma DB
+chroma_db/chroma.sqlite3
