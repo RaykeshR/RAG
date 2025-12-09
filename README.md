@@ -170,6 +170,7 @@ To start the FastAPI server, run the following command from the project's root d
 uvicorn api.main:app --reload
 ```
 The API will be available at `http://127.0.0.1:8000`. You can access the interactive Swagger UI documentation at `http://127.0.0.1:8000/docs`.
+[http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
 
 ### API Endpoints
 *   `GET /health`: Health check endpoint.
