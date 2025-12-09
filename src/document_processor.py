@@ -1,4 +1,4 @@
-from langchain_community.document_loaders import TextLoader, PyPDFLoader, DirectoryLoader
+from langchain_community.document_loaders import TextLoader, PyPDFLoader, DirectoryLoader, CSVLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_core.documents import Document as LangchainDocument
 import os
@@ -23,6 +23,8 @@ class DocumentProcessor:
             loader = TextLoader(file_path)
         elif file_extension.lower() == ".pdf":
             loader = PyPDFLoader(file_path)
+        elif file_extension.lower() == ".csv":
+            loader = CSVLoader(file_path, encoding='utf-8', csv_args={'delimiter': ','})
         # Add more loaders for other file types as needed
         # elif file_extension.lower() == ".docx":
         #     loader = Docx2txtLoader(file_path)
@@ -54,7 +56,7 @@ class DocumentProcessor:
             for file in files:
                 file_path = os.path.join(root, file)
                 # Filter for supported types
-                if file.lower().endswith(('.txt', '.pdf')): # Extend as more loaders are added
+                if file.lower().endswith(('.txt', '.pdf', '.csv')): # Extend as more loaders are added
                     print(f"Loading and chunking file: {file_path}")
                     chunks = self.load_and_chunk_file(file_path)
                     all_chunks.extend(chunks)
