@@ -76,18 +76,29 @@ class RAGPipeline:
         print(f"Retrieved {len(retrieved_docs)} documents.")
 
         if not retrieved_docs:
-            return self.generator.generate_response(query_text, [])
+            # Modification ici pour renvoyer une structure cohérente même vide
+            return {
+                "answer": self.generator.generate_response(query_text, []),
+                "sources": []
+            }
 
         # 2. Rerank
         reranked_docs = self.reranker.rerank(query_text, retrieved_docs)[:top_k]
         print(f"Reranked and selected top {len(reranked_docs)} documents.")
         
         # Convert LangchainDocument objects to dictionaries for the generator
+        # Cette variable contient déjà ce que vous voulez (content + metadata)
         docs_for_generator = [{"content": doc.page_content, "metadata": doc.metadata} for doc in reranked_docs]
 
         # 3. Generate
         final_response = self.generator.generate_response(query_text, docs_for_generator)
-        return final_response
+        
+        # --- MODIFICATION ---
+        # Au lieu de renvoyer juste le texte, on renvoie un dictionnaire
+        return {
+            "answer": final_response,
+            "sources": docs_for_generator
+        }
 
     def add_document_from_file(self, file_path: str):
         """

@@ -54,8 +54,14 @@ async def query_rag(request: QueryRequest):
     if not rag_pipeline.initialized:
         raise HTTPException(status_code=503, detail="RAG Pipeline not initialized.")
     try:
-        response = rag_pipeline.query(request.query, request.top_k)
-        return {"query": request.query, "response": response}
+        # result contient maintenant {"answer": ..., "sources": ...}
+        result = rag_pipeline.query(request.query, request.top_k)
+        
+        return {
+            "query": request.query,
+            "response": result["answer"], # La réponse textuelle du LLM
+            "sources": result["sources"]  # La liste des documents utilisés (top k)
+        }
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 

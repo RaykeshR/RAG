@@ -18,7 +18,8 @@ class Reranker:
         
         # Add scores to document metadata and sort
         for doc, score in zip(documents, scores):
-            doc.metadata['rerank_score'] = score
+            # doc.metadata['rerank_score'] = score
+            doc.metadata['rerank_score'] = float(score) # Conversion explicite en float Python
         
         documents.sort(key=lambda x: x.metadata['rerank_score'], reverse=True)
         
