@@ -50,6 +50,21 @@ The core components of the pipeline are:
 *   **Reranking:** Retrieved documents are reranked to improve relevance.
 *   **Response Generation:** A Large Language Model (LLM) generates an answer based on the query and retrieved documents.
 
+## Open Food Facts
+This project uses data from [Open Food Facts](https://world.openfoodfacts.org/), a free, open, and collaborative database of food products from around the world. The data is used to build the knowledge base of the RAG pipeline, enabling it to answer a wide range of questions about food products, their ingredients, nutritional information, and more.
+
+## Data
+You will need to download the Open Food Facts dataset to use this project. You can choose from the following formats:
+
+*   **CSV (Recommended)**: This is a single CSV file containing the entire dataset.
+    *   **Link**: [en.openfoodfacts.org.products.csv](https://static.openfoodfacts.org/data/en.openfoodfacts.org.products.csv)
+    *   **Size**: `X.XX` GB (Please update with the correct size)
+*   **MongoDB Dump (for advanced users)**: This is a compressed archive of the MongoDB database. You can extract it with WinRAR or `tar`.
+    *   **Link**: [openfoodfacts-mongodb-dump.tar.gz](https://static.openfoodfacts.org/data/openfoodfacts-mongodbdump.tar.gz)
+    *   **Size**: `X.XX` GB (Please update with the correct size)
+
+Once downloaded, place the data in the `data` directory.
+
 ### Built With
 *   [Python](https://www.python.org/)
 *   [FastAPI](https://fastapi.tiangolo.com/)
@@ -135,10 +150,12 @@ Avec  pip freeze  :
 Ajouter : `.venv`
 (Ne prend pas en compte la modification du dossier .venv)
 
-### 7. Lancer le fichier main.py 
+### 7. Lancer le serveur FastAPI 
 
-Commande : `python main.py `
-(Lance le fichier principal avec python)
+```bash
+uvicorn api.main:app --reload
+```
+(Lance le fichier serveur principal avec python)
 
 ### Linux/Mac :
 
