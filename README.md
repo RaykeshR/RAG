@@ -56,12 +56,15 @@ This project uses data from [Open Food Facts](https://world.openfoodfacts.org/),
 ## Data
 You will need to download the Open Food Facts dataset to use this project. You can choose from the following formats:
 
-*   **CSV (Recommended)**: This is a single CSV file containing the entire dataset.
+*   **CSV (for advanced users)**: This is a single CSV file containing the entire dataset.
     *   **Link**: [en.openfoodfacts.org.products.csv](https://static.openfoodfacts.org/data/en.openfoodfacts.org.products.csv)
-    *   **Size**: `X.XX` GB (Please update with the correct size)
-*   **MongoDB Dump (for advanced users)**: This is a compressed archive of the MongoDB database. You can extract it with WinRAR or `tar`.
-    *   **Link**: [openfoodfacts-mongodb-dump.tar.gz](https://static.openfoodfacts.org/data/openfoodfacts-mongodbdump.tar.gz)
-    *   **Size**: `X.XX` GB (Please update with the correct size)
+    *   **Size**: `11.20` GB (direct link)
+*   **CSV.gz (for advanced users)**: This is a compressed archive of the CSV file. You can extract it with WinRAR, File Explorer/Windows Explorer, `gzip` or `tar`.
+    *   **Link**: [en.openfoodfacts.org.products.csv.gz](https://static.openfoodfacts.org/data/en.openfoodfacts.org.products.csv.gz)
+    *   **Size**: `1.11` GB (`11.20` GB décompressé)
+*   **Sample of the CSV for test (Recommended)**: This is a sample of CSV file containing the entire dataset. You don't need to extract it.
+    *   **Link**: [sample_openfoodfacts.csv(TODO)](TODO)
+    *   **Size**: `0.02` GB (`XX.XX` GB compressé)
 
 Once downloaded, place the data in the `data` directory.
 
